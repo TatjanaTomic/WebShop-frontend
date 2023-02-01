@@ -1,0 +1,15 @@
+<div class="my-container">
+
+    <div *ngFor="let o of dataSource" style="width: 100px; height: 100px;">
+        {{ o.id }}
+        <ng-template #placeholderImage>
+            <img src="...">
+        </ng-template>
+    </div>
+
+    <mat-paginator [length]="dataSource.length"
+              [pageSize]="2"
+              [pageSizeOptions]="[2, 4, 10, 100]"
+              aria-label="Select page">
+</mat-paginator>
+</div>
