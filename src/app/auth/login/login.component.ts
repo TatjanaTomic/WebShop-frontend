@@ -24,11 +24,21 @@ export class LoginComponent implements OnInit {
   }
 
   public login(form: any) {
-    if(this.loginService.loginUser(form.value.username, form.value.password)) {
-      this.router.navigate(['']);
+
+    let username: string = form.value.username;
+    let password: string = form.value.password;
+
+    if(this.loginService.loginUser(username, password)) {
+      if(this.loginService.isActivated) {
+        this.router.navigate(['/home']);
+      }
+      else {
+        this.router.navigate(['/activation']);
+      }
     }
     else {
       this.message = "Neuspjesna prijava!";
+      this.router.navigate(['/login']);
     }
   }
 }
