@@ -10,9 +10,10 @@ export class LoginService {
 
   constructor() { }
 
-  public loginUser(username: string): boolean {
-    this.username = username;
-    this.isActive = true;
-    return this.isActive;
+  public loginUser(username: string, password: string): boolean {
+    
+
+    
+    return false;
   }
 }

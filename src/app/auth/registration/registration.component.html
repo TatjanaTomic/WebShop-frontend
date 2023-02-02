@@ -1,36 +1,36 @@
 <div class="myContainer">
     <h1 class="centeredTitle">IPWebShop - registracija</h1>
     <div class="centeredForm">
-        <form method="POST" action="" class="row g-3 myForm">
+        <form [formGroup]="form" class="row g-3 myForm">
             <div class="col-md-6">
-              <input type="text" class="form-control" name="firstName" id="firstName" required placeholder="Ime">
+              <input type="text" class="form-control" formControlName="firstName" id="firstName" required placeholder="Ime">
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control" name="lastName" id="lastName" required placeholder="Prezime">
+              <input type="text" class="form-control" formControlName="lastName" id="lastName" required placeholder="Prezime">
             </div>
             <div class="col-12">
-              <input type="text" class="form-control" name="username" id="username" required placeholder="Korisničko ime">
+              <input type="text" class="form-control" formControlName="username" id="username" required placeholder="Korisničko ime">
             </div>
             <div class="col-12">
-                <input type="text" class="form-control" name="mail" id="mail" required placeholder="Email">
+                <input type="text" class="form-control" formControlName="mail" id="mail" required placeholder="Email">
               </div>
             <div class="col-md-6">
-                <input type="password" class="form-control" name="password" id="password" required placeholder="Lozinka">
+                <input type="password" class="form-control" formControlName="password" id="password" required placeholder="Lozinka">
             </div>
             <div class="col-md-6">
-                <input type="password" class="form-control" name="password2" id="password2" required placeholder="Ponovljena lozinka">
+                <input type="password" class="form-control" formControlName="password2" id="password2" required placeholder="Ponovljena lozinka">
             </div>
             <div class="col-12">
-              <input type="text" class="form-control" name="city" id="city" required placeholder="Grad">
+              <input type="text" class="form-control" formControlName="city" id="city" required placeholder="Grad">
             </div>
             <div class="col-12">
-              <input type="text" class="form-control" name="avatar" id="avatar" placeholder="Avatar">
+              <input type="text" class="form-control" formControlName="avatar" id="avatar" placeholder="Avatar">
             </div>
             
-            <p class="resultMessage"></p>
+            <p class="errorMessage">{{ message }}</p>
     
             <div class="d-grid gap-2 col-8 mx-auto">
-              <button class="btn btn-warning btn-lg" type="submit" name="submit">Registrujte se</button>
+              <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="register(form)">Registrujte se</button>
               <a class="text-dark btn btn-link" routerLink="/login">Već ste registrovani? Prijavite se...</a>
               <a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
             </div>

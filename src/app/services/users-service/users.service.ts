@@ -11,7 +11,7 @@ export class UsersService {
   private usersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.usersUrl = 'http://localhost:9000/user-accounts';
+    this.usersUrl = 'http://localhost:9000/api/v1/user-accounts';
   }
 
   public findAll(): Observable<User[]> {

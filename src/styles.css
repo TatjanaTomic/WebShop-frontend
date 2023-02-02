@@ -37,3 +37,10 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.errorMessage {
+	color: red;
+	font-family: 'Rowdies', cursive;
+    font-weight: bold;
+    padding-top: 15px;
+}
