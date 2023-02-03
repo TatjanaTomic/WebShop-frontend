@@ -1,5 +1,5 @@
 export class User {
-    id: number;
+    id: number | null;
     firstName: string;
     lastName: string;
     username: string;
@@ -11,8 +11,8 @@ export class User {
     isActivated: boolean;
     isDeleted: boolean;
 
-    constructor(id: number, firstName: string, lastName: string, username: string, password: string,
-        city: string, avatar: string, mail: string, pin: string, isActivated: boolean, isDeleted: boolean) {
+    constructor(id: number | null, firstName: string, lastName: string, username: string, password: string,
+        city: string, avatar: string | null, mail: string, pin: string, isActivated: boolean, isDeleted: boolean) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

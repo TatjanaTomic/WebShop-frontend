@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login-service/login.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   public message: string = "";
 
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -23,13 +23,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public login(form: any) {
+  public login() {
 
-    let username: string = form.value.username;
-    let password: string = form.value.password;
+    this.message = "";
 
-    if(this.loginService.loginUser(username, password)) {
-      if(this.loginService.isActivated) {
+    let username: string = this.form.value.username;
+    let password: string = this.form.value.password;
+
+    var result = this.authService.loginUser(username, password)
+
+    if(result) {
+      if(this.authService.isActivated) {
         this.router.navigate(['/home']);
       }
       else {
@@ -37,8 +41,9 @@ export class LoginComponent implements OnInit {
       }
     }
     else {
-      this.message = "Neuspjesna prijava!";
+      this.message = "Neuspjesna prijava! Pokusajte ponovo.";
       this.router.navigate(['/login']);
+      this.form.reset();
     }
   }
 }

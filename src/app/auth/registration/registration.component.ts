@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login-service/login.service';
+import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import '../../../assets/smtp.js';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +16,7 @@ export class RegistrationComponent implements OnInit {
 
   public message: string = "";
 
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -29,12 +31,35 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  public register(form: any) {
-    if(this.loginService.loginUser(form.value.username, form.value.password)) {
-      this.router.navigate(['']);
+  public register() {
+
+    this.message = "";
+
+    let firstName: string = this.form.value.firstName;
+    let lastName: string = this.form.value.lastName;
+    let username: string = this.form.value.username;
+    let password: string = this.form.value.password;
+    let password2: string = this.form.value.password2;
+    let mail: string = this.form.value.mail;
+    let city: string = this.form.value.city;
+    let avatar: string|null = this.form.value.avatar;
+
+    if(password != password2) {
+      this.message = "Lozinke se ne poklapaju!";
+    }
+    else if (this.authService.isUsernameTaken(username)) {
+      this.message = "Korisnicko ime je zauzeto! Unesite novo korisnicko ime.";
     }
     else {
-      this.message = "Neuspjesna registracija!";
+      let pin = this.authService.generatePIN();
+      let user = new User(null, firstName, lastName, username, password, city, avatar, mail, pin, false, false);
+    
+      this.authService.register(user);
     }
+    
+
+    
   }
+
+  
 }

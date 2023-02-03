@@ -30,7 +30,7 @@
             <p class="errorMessage">{{ message }}</p>
     
             <div class="d-grid gap-2 col-8 mx-auto">
-              <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="register(form)">Registrujte se</button>
+              <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="register()">Registrujte se</button>
               <a class="text-dark btn btn-link" routerLink="/login">Već ste registrovani? Prijavite se...</a>
               <a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
             </div>

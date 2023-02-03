@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login-service/login.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-activation',
@@ -14,7 +14,7 @@ export class ActivationComponent implements OnInit {
 
   public message: string = "";
 
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private loginService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
