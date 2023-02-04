@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SendMessageComponent } from './send-message/send-message/send-message.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -24,6 +25,7 @@ import { SendMessageComponent } from './send-message/send-message/send-message.c
     OfferDetailsComponent,
     HeaderComponent,
     SendMessageComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

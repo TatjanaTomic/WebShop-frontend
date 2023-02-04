@@ -1,0 +1,26 @@
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.left {
+    width: 60%;
+}
+
+.profileForm {
+    width: 40vw;
+}
+
+.right {
+    width: 40%;
+}
+
+.passwordForm {
+    width: 30vw;
+}
+
+.profileTitle {
+    margin-top: 25px;
+}

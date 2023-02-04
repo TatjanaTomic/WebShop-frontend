@@ -1,0 +1,56 @@
+<div class="rowContainer">
+    <div class="left">
+         
+        <h1 class="centeredTitle profileTitle">Izmjena ličnih podataka</h1>
+        <div class="centeredForm">
+            <form [formGroup]="form" class="row g-3 myForm profileForm">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">Ime</label>
+                    <input type="text" class="form-control" formControlName="firstName" id="firstName" required >
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Prezime</label>
+                    <input type="text" class="form-control" formControlName="lastName" id="lastName" required >
+                </div>
+                <div class="col-12">
+                    <label for="username" class="form-label">Korisničko ime</label>
+                    <input type="text" class="form-control" formControlName="username" id="username" required readonly>
+                </div>
+                <div class="col-12">
+                    <label for="mail" class="form-label">Email</label>
+                    <input type="text" class="form-control" formControlName="mail" id="mail" required >
+                </div>
+                <div class="col-12">
+                    <label for="city" class="form-label">Grad</label>
+                    <input type="text" class="form-control" formControlName="city" id="city" required>
+                </div>
+                <div class="col-12">
+                    <label for="avatar" class="form-label">Avatar</label>
+                    <input type="text" class="form-control" formControlName="avatar" id="avatar">
+                </div>
+        
+                <div class="d-grid gap-2 col-8 mx-auto">
+                    <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="saveUserInfo()">Sačuvaj podatke</button>
+                </div>
+            </form>   
+        </div>
+    </div>
+
+    <div class="right">
+        <h1 class="centeredTitle profileTitle">Promjena lozinke</h1>
+        <div class="centeredForm">
+            <form [formGroup]="passwordForm" class="row g-3 myForm passwordForm">
+                <div class="col-12">
+                    <input type="password" class="form-control" formControlName="password" id="password" required placeholder="Lozinka">
+                </div>
+                <div class="col-12">
+                    <input type="password" class="form-control" formControlName="password2" id="password2" required placeholder="Ponovljena lozinka">
+                </div>
+        
+                <div class="d-grid gap-2 col-8 mx-auto">
+                    <button class="btn btn-warning btn-lg" [disabled]="passwordForm.invalid" (click)="savePassword()">Sačuvaj lozinku</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

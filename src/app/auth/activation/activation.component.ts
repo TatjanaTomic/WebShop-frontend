@@ -12,8 +12,6 @@ export class ActivationComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({});
 
-  public message: string = "";
-
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {

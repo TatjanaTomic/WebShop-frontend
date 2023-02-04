@@ -15,8 +15,6 @@ export class RegistrationComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({});
 
-  public message: string = "";
-
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private toast: ToastrService) { }
 
   ngOnInit(): void {
@@ -33,8 +31,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   public register() {
-
-    this.message = "";
 
     let firstName: string = this.form.value.firstName;
     let lastName: string = this.form.value.lastName;
