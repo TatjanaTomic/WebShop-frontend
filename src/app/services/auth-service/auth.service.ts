@@ -1,7 +1,7 @@
-import { NonNullAssert } from '@angular/compiler';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
 import { UsersService } from '../users-service/users.service';
 
@@ -15,25 +15,87 @@ export class AuthService {
   public isActivated: boolean = false;
   public users: User[] = [];
 
-  constructor(private usersService: UsersService, private router: Router) {
+  constructor(private usersService: UsersService, private router: Router, private toast: ToastrService) {
     this.usersService.findAll().subscribe(data => { this.users = data; });
   }
 
-  public loginUser(username: string, password: string): boolean {
+  public loginUser(username: string, password: string) {
+    this.usersService.findByUsername(username).subscribe({
+      next: (response: User) => {
 
-    let result = false;
-    this.activeUser = null;
-    this.usersService.findAll().subscribe(data => { this.users = data; });
-    this.users.forEach(user => {
-      if (user.username == username && user.password == password) {
-        result = true;
-        this.activeUser = user;
-        this.isActivated = user.isActivated;
+        if(response.password == password) {
+          
+          this.activeUser = response;
+          this.isSignedIn = true;
+          this.isActivated = response.isActivated;
+
+          if(!response.isActivated) {
+            this.sendNewPIN();
+          }
+          else {
+            this.router.navigate(['/home']);
+          }
+        }
+        else {
+          this.toast.error("Pogrešna lozinka!");
+        }
+      },
+      error: (response: HttpErrorResponse) => {
+        if(response.status === 404) {
+          this.toast.error("Pogrešno korisničko ime!");
+        }
+        else {
+          this.toast.error("Dogodila se greška prilikom prijave! Pokušajte ponovo.");
+        }
       }
     });
-    this.isSignedIn = result;
+  }
 
-    return result;
+  public register(user: User) {
+    this.usersService.insert(user).subscribe({
+      next: (result : User) => {
+
+        this.activeUser = result;
+        this.isSignedIn = true;
+        this.isActivated = false;
+
+        //TODO : Posalji mail
+        this.toast.success("Uspješno ste se registrovali!");
+        this.router.navigate(['/activation']);
+      },
+      error: (response: HttpErrorResponse) => {
+        if(response.status === 409) {
+          this.toast.error("Korisničko ime je zauzeto! Pokušajte ponovo.");
+        }
+        else {
+          this.toast.error("Dogodila se greška prilikom registracije! Pokušajte ponovo.");
+        }
+      }
+    });
+  }
+
+  public activate(pin: string) {
+    if(this.activeUser && pin == this.activeUser.pin) {
+      this.activeUser.isActivated = true;
+      this.usersService.update(this.activeUser).subscribe({
+        next: (result : User) => {
+          this.activeUser = result;
+          this.isActivated = true;
+
+          this.toast.success("Uspješno ste aktivirali nalog!");
+          this.router.navigate(['/home']);
+        },
+        error: (response: HttpErrorResponse) => {
+          this.toast.error("Došlo je do greške prilikom aktivacije naloga!");
+        }
+      });
+    }
+    else if(this.activeUser && pin != this.activeUser.pin) {
+      this.toast.error("Unijeli ste pogrešan PIN! Pokušajte ponovo.");
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
   }
 
   public logout() {
@@ -41,25 +103,7 @@ export class AuthService {
     this.isSignedIn = false;
     this.isActivated = false;
     this.router.navigate(['/home']);
-  }
-
-  public isUsernameTaken(username: string): boolean {
-    let result = false;
-
-    this.usersService.findAll().subscribe(data => { this.users = data; });
-    this.users.forEach(user => {
-      if (user.username == username) {
-        result = true;
-      }
-    });
-
-    return result;
-  }
-
-  public register(user: User) {
-    this.usersService.save(user).subscribe((response: any) => {
-      console.log(response);
-    });
+    window.location.reload();
   }
 
   public generatePIN() {
@@ -68,5 +112,26 @@ export class AuthService {
       result += Math.floor(Math.random() * 10);
     }
     return result;
+  }
+
+  public sendNewPIN() {
+    let newPin = this.generatePIN();
+    if(this.activeUser) {
+      this.activeUser.pin = newPin;
+      this.usersService.update(this.activeUser).subscribe({
+        next: (result: User) => {
+          //TODO : Posalji mail
+          this.activeUser = result;
+          this.toast.warning("Morate da aktivirate nalog! Unesite novi PIN!");
+          this.router.navigate(['/activation']);
+        },
+        error: () => {
+          this.toast.error("Došlo je do greške prilikom slanja novog maila!");
+          this.router.navigate(['/login']);}
+      });
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
   }
 }

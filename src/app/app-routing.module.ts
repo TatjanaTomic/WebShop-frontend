@@ -4,6 +4,9 @@ import { ActivationComponent } from './auth/activation/activation.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { SendMessageComponent } from './home/send-message/send-message/send-message.component';
+import { ActivationGuardService } from './services/activation-guard-service/activation-guard.service';
+import { GuardService } from './services/guard-service/guard.service';
 
 const routes: Routes = [
   {
@@ -20,7 +23,13 @@ const routes: Routes = [
   },
   {
     path: 'activation',
-    component: ActivationComponent
+    component: ActivationComponent,
+    canActivate: [ActivationGuardService]
+  },
+  {
+    path: 'send-message',
+    component: SendMessageComponent,
+    canActivate: [GuardService]
   },
   {
     path: '',

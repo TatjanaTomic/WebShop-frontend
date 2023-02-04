@@ -12,6 +12,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SendMessageComponent } from './send-message/send-message/send-message.component';
 
 
 
@@ -22,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OfferComponent,
     OfferDetailsComponent,
     HeaderComponent,
+    SendMessageComponent,
   ],
   imports: [
     BrowserModule,

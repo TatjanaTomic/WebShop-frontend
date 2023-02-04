@@ -14,21 +14,17 @@ export class ActivationComponent implements OnInit {
 
   public message: string = "";
 
-  constructor(private loginService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: [null, Validators.required],
       pin: [null, Validators.required]
     });
   }
 
-  public activate(form: any) {
-    if(this.loginService.loginUser(form.value.username, form.value.pin)) {
-      this.router.navigate(['']);
-    }
-    else {
-      this.message = "Neuspjesna aktivacija!";
-    }
+  public activate() {
+    let pin = this.form.value.pin;
+
+    this.authService.activate(pin);
   }
 }

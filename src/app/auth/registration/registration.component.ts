@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import '../../../assets/smtp.js';
@@ -16,7 +17,7 @@ export class RegistrationComponent implements OnInit {
 
   public message: string = "";
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -45,21 +46,13 @@ export class RegistrationComponent implements OnInit {
     let avatar: string|null = this.form.value.avatar;
 
     if(password != password2) {
-      this.message = "Lozinke se ne poklapaju!";
-    }
-    else if (this.authService.isUsernameTaken(username)) {
-      this.message = "Korisnicko ime je zauzeto! Unesite novo korisnicko ime.";
+      this.toast.error("Lozinke se ne poklapaju!");
     }
     else {
-      let pin = this.authService.generatePIN();
-      let user = new User(null, firstName, lastName, username, password, city, avatar, mail, pin, false, false);
-    
+      let user = new User(null, firstName, lastName, username, password, city, avatar, mail, this.authService.generatePIN(), false, false);
+
       this.authService.register(user);
     }
-    
-
-    
   }
 
-  
 }

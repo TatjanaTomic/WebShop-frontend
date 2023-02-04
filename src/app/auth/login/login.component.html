@@ -8,8 +8,6 @@
             <div class="col-12">
                 <input type="password" class="form-control" formControlName="password" id="password" required placeholder="Lozinka">
             </div>
-
-            <p class="errorMessage">{{ message }}</p>
     
             <div class="d-grid gap-2 col-8 mx-auto">
                 <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="login()">Prijavite se</button>

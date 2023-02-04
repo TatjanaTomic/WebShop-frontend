@@ -1,31 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/User';
-import { catchError, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
 
-  private usersUrl: string;
+  private baseUrl: string;
   public users: User[] = [];
 
   constructor(private http: HttpClient) {
-    this.usersUrl = 'http://localhost:9000/api/v1/user-accounts';
+    this.baseUrl = 'http://localhost:9000/api/v1/user-accounts';
   }
 
   public findAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
+    return this.http.get<User[]>(this.baseUrl);
   }
 
   public findByUsername(username: string) : Observable<User> {
-    return this.http.get<User>(this.usersUrl + '/username/' + username);
+    return this.http.get<User>(this.baseUrl + '/username/' + username);
   }
 
-  public save(user: User) {
-    return this.http.post<User>(this.usersUrl, user);
+  public insert(user: User) {
+    return this.http.post<User>(this.baseUrl, user);
   }
 
+  public update(user: User) {
+    return this.http.put<User>(this.baseUrl + '/' + user.id, user);
+  }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { EmailService } from 'src/app/services/email-service/email.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,7 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({});
 
-  public message: string = "";
-
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private emailService: EmailService, private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -24,26 +23,11 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-
-    this.message = "";
-
     let username: string = this.form.value.username;
     let password: string = this.form.value.password;
 
-    var result = this.authService.loginUser(username, password)
+    this.authService.loginUser(username, password);
 
-    if(result) {
-      if(this.authService.isActivated) {
-        this.router.navigate(['/home']);
-      }
-      else {
-        this.router.navigate(['/activation']);
-      }
-    }
-    else {
-      this.message = "Neuspjesna prijava! Pokusajte ponovo.";
-      this.router.navigate(['/login']);
-      this.form.reset();
-    }
+    //this.emailService.send(new Mail("tatjanatomic997@yahoo.com", "hello")).subscribe();
   }
 }
