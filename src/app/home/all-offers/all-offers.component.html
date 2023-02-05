@@ -1,11 +1,18 @@
 <div class="my-container">
 
-    <div *ngFor="let o of users" style="width: 100px; height: 100px; margin: 10px; background-color: blue;">
-        {{ o.username }}
+    <div *ngFor="let o of offers" class="offerCard">
+        <div class="card" style="width: 18rem;">
+            <img src={{o.product.images[0].url}} class="card-img-top" alt="..." *ngIf="o.product.images[0]">
+            <div class="card-body">
+              <h5 class="card-title">{{ o.product.name }}</h5>
+              <p class="card-text">{{ o.product.price }}</p>
+              <a href="#" class="btn btn-primary">Više detalja...</a>
+            </div>
+          </div>
     </div>
 
     
-    <mat-paginator [length]="users.length"
+    <mat-paginator [length]="offers.length"
               [pageSize]="2"
               [pageSizeOptions]="[2, 4, 10, 100]"
               aria-label="Select page">

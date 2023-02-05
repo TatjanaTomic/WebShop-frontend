@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Offer } from 'src/app/models/Offer';
 import { User } from 'src/app/models/User';
+import { OffersService } from 'src/app/services/offers-service/offers.service';
 import { UsersService } from 'src/app/services/users-service/users.service';
 
 @Component({
@@ -9,12 +11,12 @@ import { UsersService } from 'src/app/services/users-service/users.service';
 })
 export class AllOffersComponent implements OnInit {
 
-  public users: User[] = [];
+  public offers: Offer[] = [];
 
-  constructor(private usersService: UsersService) {
+  constructor(private offersService: OffersService) {
   }
 
   ngOnInit(): void {
-    this.usersService.findAll().subscribe(data => { this.users = data; });
+    this.offersService.findAll().subscribe(data => { this.offers = data; });
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { AllOffersComponent } from './all-offers/all-offers.component';
 import { AppMaterialModule } from '../app-material/app-material.module';
-import { OfferComponent } from './offer/offer.component';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -21,7 +20,6 @@ import { ProfileComponent } from './profile/profile.component';
   declarations: [
     HomeComponent,
     AllOffersComponent,
-    OfferComponent,
     OfferDetailsComponent,
     HeaderComponent,
     SendMessageComponent,

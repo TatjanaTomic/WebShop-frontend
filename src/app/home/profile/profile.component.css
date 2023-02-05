@@ -24,3 +24,8 @@
 .profileTitle {
     margin-top: 25px;
 }
+
+.myLink {
+    width: 100%;
+    text-align: right;
+}
