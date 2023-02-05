@@ -1,21 +1,22 @@
-<div class="my-container">
+<div class="all-offers-container">
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" *ngFor="let o of array">
-          <div class="card h-100">
-            <img src={{o.product.images[0].url}} class="card-img-top" alt="..." *ngIf="o.product.images[0]">
-            <img src="../../../assets/product-photo.png" class="card-img-top" alt="..." *ngIf="!o.product.images[0]">
-            
-            <div class="card-body">
-                <h5 class="card-title">{{ o.product.name }}</h5>
-                <p class="card-text">{{ o.product.price }}</p>
-                <a href="#" class="btn btn-primary">Više detalja...</a></div>
-          </div>
+    <div class="offers-container">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col" *ngFor="let o of obs | async">
+                <div class="card h-100 my-card">
+                    <img src={{o.product.images[0].url}} class="card-img-top my-card-image" alt="..." *ngIf="o.product.images[0]">
+                    <img src="../../../assets/product-photo.png" class="card-img-top my-card-image" alt="..." *ngIf="!o.product.images[0]">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ o.product.name }}</h5>
+                        <p class="card-text">{{ o.product.price }}</p>
+                        <a href="#" class="btn btn-primary">Više detalja...</a></div>
+                </div>
+            </div>
         </div>
     </div>
-
     
-    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="totalSize"
+    <mat-paginator class="my-paginator" #paginator [pageSize]="pageSize" [pageSizeOptions]="[4, 8, 20]" [showFirstLastButtons]="true" [length]="totalSize"
         [pageIndex]="currentPage" (page)="handlePage($event)">
     </mat-paginator>
 </div>

@@ -1,4 +1,23 @@
-.my-container {
+.all-offers-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.offers-container {
+    padding: 25px;
+    padding-bottom: 100px;
+}
+
+.my-card {
+    max-width: 250px;
+}
+
+.my-card-image {
+    max-height: 150px;
+}
+
+.my-paginator {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
