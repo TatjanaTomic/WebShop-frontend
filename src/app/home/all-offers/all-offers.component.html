@@ -1,20 +1,21 @@
 <div class="my-container">
 
-    <div *ngFor="let o of offers" class="offerCard">
-        <div class="card" style="width: 18rem;">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let o of array">
+          <div class="card h-100">
             <img src={{o.product.images[0].url}} class="card-img-top" alt="..." *ngIf="o.product.images[0]">
+            <img src="../../../assets/product-photo.png" class="card-img-top" alt="..." *ngIf="!o.product.images[0]">
+            
             <div class="card-body">
-              <h5 class="card-title">{{ o.product.name }}</h5>
-              <p class="card-text">{{ o.product.price }}</p>
-              <a href="#" class="btn btn-primary">Više detalja...</a>
-            </div>
+                <h5 class="card-title">{{ o.product.name }}</h5>
+                <p class="card-text">{{ o.product.price }}</p>
+                <a href="#" class="btn btn-primary">Više detalja...</a></div>
           </div>
+        </div>
     </div>
 
     
-    <mat-paginator [length]="offers.length"
-              [pageSize]="2"
-              [pageSizeOptions]="[2, 4, 10, 100]"
-              aria-label="Select page">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="totalSize"
+        [pageIndex]="currentPage" (page)="handlePage($event)">
     </mat-paginator>
 </div>
