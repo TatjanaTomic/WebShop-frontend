@@ -4,6 +4,7 @@ import { ActivationComponent } from './auth/activation/activation.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { OfferDetailsComponent } from './home/offer-details/offer-details.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { SendMessageComponent } from './home/send-message/send-message/send-message.component';
 import { ActivationGuardService } from './services/activation-guard-service/activation-guard.service';
@@ -36,6 +37,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [GuardService]
+  },
+  {
+    path: 'details',
+    component: OfferDetailsComponent
   },
   {
     path: '',

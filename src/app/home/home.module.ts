@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SendMessageComponent } from './send-message/send-message/send-message.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -34,7 +35,12 @@ import { ProfileComponent } from './profile/profile.component';
     BrowserAnimationsModule,
     CommonModule,
     AppMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ]
 })
 export class HomeModule { }

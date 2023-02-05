@@ -5,7 +5,7 @@
     flex-wrap: wrap;
 }
 
-.left {
+.right {
     width: 60%;
 }
 
@@ -13,7 +13,7 @@
     width: 40vw;
 }
 
-.right {
+.left {
     width: 40%;
 }
 
@@ -28,4 +28,15 @@
 .myLink {
     width: 100%;
     text-align: right;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
+.img-container {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
 }

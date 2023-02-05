@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@ang
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { Offer } from 'src/app/models/Offer';
@@ -30,7 +31,7 @@ export class AllOffersComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({});
 
-  constructor(private offersService: OffersService, private categoriesService: CategoriesService, private formBuilder: FormBuilder, private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private offersService: OffersService, private categoriesService: CategoriesService, private formBuilder: FormBuilder, private router: Router, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -113,6 +114,11 @@ export class AllOffersComponent implements OnInit {
         this.totalSize = this.array.length;
         this.iterator();
       });
+  }
+
+  public viewDetails(o: Offer) {
+    this.offersService.setOffer(o);
+    this.router.navigate(['/details']);
   }
 
 }

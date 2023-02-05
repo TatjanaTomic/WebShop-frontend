@@ -7,24 +7,18 @@ import { Offer } from 'src/app/models/Offer';
   providedIn: 'root'
 })
 export class OffersService {
-  setPageSize(Page: number, Size: number): Offer[] {
-    throw new Error('Method not implemented.');
-  }
-  getSize() {
-    throw new Error('Method not implemented.');
-  }
 
   private baseUrl: string;
 
-  private offer$ = new BehaviorSubject<any>({});
-  selectedOffer$ = this.offer$.asObservable();
+  private dataSource = new BehaviorSubject<any>({});
+  public offer = this.dataSource.asObservable();
 
   constructor(private http: HttpClient) {
     this.baseUrl = 'http://localhost:9000/api/v1/offers';
   }
 
-  setOffer(offer: any) {
-    this.offer$.next(offer);
+  setOffer(o: Offer) {
+    this.dataSource.next(o);
   }
 
   public findAll() {
@@ -36,9 +30,6 @@ export class OffersService {
   }
 
   public findByCategoryId(id: number) {
-    console.log("URL");
-    console.log(this.baseUrl + '/idCategory/' + id);
-    
     return this.http.get<Offer[]>(this.baseUrl + '/idCategory/' + id);
   }
 }

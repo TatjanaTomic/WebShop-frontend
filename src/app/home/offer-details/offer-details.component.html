@@ -1,1 +1,54 @@
-<p>offer-details works!</p>
+<div class="details-container" *ngIf="offer">
+    <div class="first-row">
+        <a class="text-dark btn btn-link myLink" routerLink="/home">Početna stranica...</a>
+        <h1>{{ offer.product.name }}</h1>
+    </div>
+    
+    <div class="details-row">
+        <div class="details">
+            <div class="details-content">
+                <h1>Proizvod: {{offer.product.name}}</h1>
+                <h2>Cijena: {{offer.product.price}}KM</h2>
+                <h3 *ngIf="offer.product.isNew">Stanje: NOVO</h3>
+                <h3 *ngIf="!offer.product.isNew">Stanje: KORISTENO</h3>
+                <h3>Kategorija: {{getCategoryName(offer.product.category)}}</h3>
+                <h4>Adresa: {{offer.product.address}}</h4>
+                <h4>Kontakt: {{offer.product.contact}}</h4>
+                <p>Detaljan opis: {{offer.product.description}}</p>
+                <button class="btn btn-outline-success" (click)="buyProduct()">Kupi proizvod</button>
+            </div>
+
+            <div class="images">
+                <div class="image-card" *ngFor="let im of offer.product.images">
+                    <img src={{im.url}}>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="comments" *ngIf="comments">
+            <div class="newComment" *ngIf="userSignedIn">
+            <h1>Novi komentar</h1>
+                <form [formGroup]="commentForm" class="row g-3">
+                    <div class="col-12">
+                        <input type="text" class="form-control" formControlName="comment" id="comment" required placeholder="Sadržaj"/>
+                    </div>
+            
+                    <div class="d-grid gap-2 col-8 mx-auto">
+                        <button class="btn btn-outline-success" [disabled]="commentForm.invalid" (click)="saveComment()">Sačuvaj komentar</button>
+                    </div>
+                </form>
+            </div>
+
+            <h1 class="commentTitle">Komentari</h1>
+                <div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor="let comm of comments">
+                    <div class="card-header">{{ comm.userAccount.username }}</div>
+                    <div class="card-body">
+                    <p class="card-text">{{ comm.content }}</p>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+</div>

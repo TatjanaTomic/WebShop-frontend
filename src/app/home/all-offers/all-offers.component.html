@@ -27,14 +27,14 @@
     <div class="offers-container">
       <p class="emptyData" *ngIf="totalSize === 0">Nema podataka za prikaz.</p>
             <div *ngFor="let o of obs | async" class="my-card-wrapper">
-                <div class="card h-100 my-card">
-                    <img src={{o.product.images[0].url}} class="card-img-top my-card-image" alt="..." *ngIf="o.product.images[0]">
-                    <img src="../../../assets/product-photo.png" class="card-img-top my-card-image" alt="..." *ngIf="!o.product.images[0]">
+                <div class="card h-100 my-card" *ngIf="o.isActive">
+                    <img src={{o.product.images[0].url}} class="card-img-top my-card-image" *ngIf="o.product.images[0]">
+                    <img src="../../../assets/product-photo.png" class="card-img-top my-card-image" *ngIf="!o.product.images[0]">
                     
                     <div class="card-body">
                         <h5 class="card-title">{{ o.product.name }}</h5>
-                        <p class="card-text">{{ o.product.price }}</p>
-                        <a href="#" class="btn btn-primary">Više detalja...</a>
+                        <p class="card-text">{{ o.product.price }}KM</p>
+                        <button class="btn btn-primary" (click)="viewDetails(o)">Više detalja...</button>
                     </div>
                 </div>
             </div>
