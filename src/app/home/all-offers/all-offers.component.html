@@ -1,8 +1,32 @@
 <div class="all-offers-container">
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid menu-header">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 large">
+              <li class="nav-item">
+                <button class="btn btn-light" aria-current="page" (click)="getArray()">Svi proizvodi</button>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Izbor kategorije
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li *ngFor="let c of selectElemenValues"><button class="dropdown-item" (click)="selectCategory(c.catId)">{{c.catTitle}}</button></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" [formGroup]="form" >
+              <input class="form-control me-2" type="search" name="content" formControlName="content" placeholder="Naziv" aria-label="Search">
+              <button class="btn btn-outline-success" [disabled]="form.invalid" (click)="search()">Pretraži</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
     <div class="offers-container">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col" *ngFor="let o of obs | async">
+      <p class="emptyData" *ngIf="totalSize === 0">Nema podataka za prikaz.</p>
+            <div *ngFor="let o of obs | async" class="my-card-wrapper">
                 <div class="card h-100 my-card">
                     <img src={{o.product.images[0].url}} class="card-img-top my-card-image" alt="..." *ngIf="o.product.images[0]">
                     <img src="../../../assets/product-photo.png" class="card-img-top my-card-image" alt="..." *ngIf="!o.product.images[0]">
@@ -10,11 +34,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ o.product.name }}</h5>
                         <p class="card-text">{{ o.product.price }}</p>
-                        <a href="#" class="btn btn-primary">Više detalja...</a></div>
+                        <a href="#" class="btn btn-primary">Više detalja...</a>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
+    
     
     <mat-paginator class="my-paginator" #paginator [pageSize]="pageSize" [pageSizeOptions]="[4, 8, 20]" [showFirstLastButtons]="true" [length]="totalSize"
         [pageIndex]="currentPage" (page)="handlePage($event)">

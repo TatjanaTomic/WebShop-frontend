@@ -16,4 +16,9 @@ export class CategoriesService {
   public findAll() {
     return this.http.get<Category[]>(this.baseUrl);
   }
+
+  public findById(id: number) {
+    return this.http.get<Category>(this.baseUrl + '/' + id);
+  }
+ 
 }

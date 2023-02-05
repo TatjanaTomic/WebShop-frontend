@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { Category } from 'src/app/models/Category';
 import { Offer } from 'src/app/models/Offer';
+import { CategoriesService } from 'src/app/services/categories-service/categories.service';
 import { OffersService } from 'src/app/services/offers-service/offers.service';
 
 @Component({
@@ -13,6 +16,8 @@ import { OffersService } from 'src/app/services/offers-service/offers.service';
 })
 export class AllOffersComponent implements OnInit {
   
+  public categories: Category[] = [];
+  public selectElemenValues: {catTitle: string, catId: number}[] = [];
   public array: Offer[] = [];
   public dataSource: any;  
 
@@ -23,10 +28,31 @@ export class AllOffersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   obs: Observable<any> | undefined;
 
-  constructor(private offersService: OffersService, private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {}
+  public form: FormGroup = new FormGroup({});
+
+  constructor(private offersService: OffersService, private categoriesService: CategoriesService, private formBuilder: FormBuilder, private http: HttpClient, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      content: [null, Validators.required]
+    });
+    this.prepareSelectELement();
     this.getArray();
+  }
+
+  search() {
+    let content = this.form.value.content;
+
+    this.offersService.findByProductName(content).subscribe(
+      (response) => {
+        this.changeDetectorRef.detectChanges();
+        this.dataSource = new MatTableDataSource<Offer>(response);
+        this.dataSource.paginator = this.paginator;
+        this.obs = this.dataSource.connect();
+        this.array = response;
+        this.totalSize = this.array.length;
+        this.iterator();
+      });
   }
 
   public handlePage(e: any) {
@@ -35,7 +61,7 @@ export class AllOffersComponent implements OnInit {
     this.iterator();
   }
 
-  private getArray() {
+  public getArray() {
     this.offersService.findAll().subscribe(
       (response) => {
         this.changeDetectorRef.detectChanges();
@@ -53,6 +79,40 @@ export class AllOffersComponent implements OnInit {
     const start = this.currentPage * this.pageSize;
     const part = this.array.slice(start, end);
     this.dataSource = part;
+  }
+
+  public prepareSelectELement() {
+    this.categoriesService.findAll().subscribe((result) => {
+      this.categories = result;
+      for(var c of result) {
+        let catId = c.id;
+        let catTitle = this.returnName(c);
+        this.selectElemenValues.push({catTitle, catId});
+      }
+      this.selectElemenValues.sort((a, b) => a.catTitle.localeCompare(b.catTitle));
+    });
+  }
+
+  public returnName(c: Category): string {
+    if(c.parentCategory != null) {
+      return this.returnName(c.parentCategory) + "  >>  " + c.name;
+    }
+    else {
+      return c.name;
+    }
+  }
+
+  public selectCategory(id: number) {
+    this.offersService.findByCategoryId(id).subscribe(
+      (response) => {
+        this.changeDetectorRef.detectChanges();
+        this.dataSource = new MatTableDataSource<Offer>(response);
+        this.dataSource.paginator = this.paginator;
+        this.obs = this.dataSource.connect();
+        this.array = response;
+        this.totalSize = this.array.length;
+        this.iterator();
+      });
   }
 
 }

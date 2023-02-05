@@ -30,4 +30,15 @@ export class OffersService {
   public findAll() {
     return this.http.get<Offer[]>(this.baseUrl);
   }
+
+  public findByProductName(content: string) {
+    return this.http.get<Offer[]>(this.baseUrl + '/product/' + content);
+  }
+
+  public findByCategoryId(id: number) {
+    console.log("URL");
+    console.log(this.baseUrl + '/idCategory/' + id);
+    
+    return this.http.get<Offer[]>(this.baseUrl + '/idCategory/' + id);
+  }
 }
