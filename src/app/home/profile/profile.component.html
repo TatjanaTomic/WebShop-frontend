@@ -1,6 +1,9 @@
 <div class="rowContainer">
 
     <div class="left">
+        
+        <a mat-button routerLink="/my-offers" >Moje ponude</a>
+
         <div class="img-container">
             <img src={{user.avatar}} *ngIf="user && user.avatar!=null"/>
             <img src="../../../assets/product-photo.png" *ngIg="user.avatar==null"/>

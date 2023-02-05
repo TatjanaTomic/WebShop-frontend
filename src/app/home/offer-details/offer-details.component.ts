@@ -7,6 +7,7 @@ import { Category } from 'src/app/models/Category';
 import { MyComment } from 'src/app/models/MyComment';
 import { Offer } from 'src/app/models/Offer';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { CategoriesService } from 'src/app/services/categories-service/categories.service';
 import { CommentsService } from 'src/app/services/comments-service/comments.service';
 import { OffersService } from 'src/app/services/offers-service/offers.service';
 
@@ -23,7 +24,7 @@ export class OfferDetailsComponent implements OnInit {
 
   public commentForm: FormGroup = new FormGroup({});
 
-  constructor(private offersService: OffersService, private commentsService: CommentsService, private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private toast: ToastrService) {
+  constructor(private offersService: OffersService, private categoriesService: CategoriesService, private commentsService: CommentsService, private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private toast: ToastrService) {
   }
 
   ngOnInit() : void {
@@ -61,15 +62,10 @@ export class OfferDetailsComponent implements OnInit {
   }
 
   public getCategoryName(c: Category): string {
-    if(c.parentCategory != null) {
-      return this.getCategoryName(c.parentCategory) + "  >>  " + c.name;
-    }
-    else {
-      return c.name;
-    }
+    return this.categoriesService.getCategoryTitle(c);
   }
   
-  public buyProduct() {
-
+  public buyProduct(offer: Offer) {
+    
   }
 }

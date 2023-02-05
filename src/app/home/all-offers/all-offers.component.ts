@@ -95,12 +95,7 @@ export class AllOffersComponent implements OnInit {
   }
 
   public returnName(c: Category): string {
-    if(c.parentCategory != null) {
-      return this.returnName(c.parentCategory) + "  >>  " + c.name;
-    }
-    else {
-      return c.name;
-    }
+    return this.categoriesService.getCategoryTitle(c);
   }
 
   public selectCategory(id: number) {

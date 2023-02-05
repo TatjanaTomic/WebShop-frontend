@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SendMessageComponent } from './send-message/send-message/send-message.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 
 
 
@@ -25,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
     HeaderComponent,
     SendMessageComponent,
     ProfileComponent,
+    MyOffersComponent,
   ],
   imports: [
     BrowserModule,

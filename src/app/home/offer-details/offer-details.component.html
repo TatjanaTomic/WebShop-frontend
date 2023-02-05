@@ -1,7 +1,6 @@
 <div class="details-container" *ngIf="offer">
     <div class="first-row">
         <a class="text-dark btn btn-link myLink" routerLink="/home">Početna stranica...</a>
-        <h1>{{ offer.product.name }}</h1>
     </div>
     
     <div class="details-row">
@@ -15,7 +14,7 @@
                 <h4>Adresa: {{offer.product.address}}</h4>
                 <h4>Kontakt: {{offer.product.contact}}</h4>
                 <p>Detaljan opis: {{offer.product.description}}</p>
-                <button class="btn btn-outline-success" (click)="buyProduct()">Kupi proizvod</button>
+                <button class="btn btn-success" (click)="buyProduct(offer)">Kupi proizvod</button>
             </div>
 
             <div class="images">

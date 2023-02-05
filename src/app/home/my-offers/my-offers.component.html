@@ -1,0 +1,21 @@
+<h1>Pregled ličnih ponuda</h1>
+
+<div class="offers-container">
+    <p class="emptyData" *ngIf="myOffers.length === 0">Nema podataka za prikaz.</p>
+          <div *ngFor="let o of myOffers" class="my-card-wrapper">
+              <div class="card h-100 my-card" *ngIf="o.isActive">
+                  <img src={{o.product.images[0].url}} class="card-img-top my-card-image" *ngIf="o.product.images[0]">
+                  <img src="../../../assets/product-photo.png" class="card-img-top my-card-image" *ngIf="!o.product.images[0]">
+                  
+                  <div class="card-body">
+                      <h4><b>{{ o.product.name }}</b></h4>
+                      <h4>Kategorija: {{getCategoryTitle(o.product.category)}}</h4>
+                      <h4>Status: <span style="color: green;" *ngIf="o.isActive">AKTIVNA</span><span style="color: red;" *ngIf="!o.isActive">ZAVRSENA</span></h4>
+                      <h5>{{ o.product.price }}KM</h5>
+                      <p class="card-text">{{ o.product.description }}</p>
+                      
+                      <button class="btn btn-danger" (click)="deleteOffer(o)">Obriši ponudu</button>
+                  </div>
+              </div>
+          </div>
+  </div>

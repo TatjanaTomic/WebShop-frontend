@@ -20,5 +20,14 @@ export class CategoriesService {
   public findById(id: number) {
     return this.http.get<Category>(this.baseUrl + '/' + id);
   }
+
+  public getCategoryTitle(c: Category): string {
+    if(c.parentCategory != null) {
+      return this.getCategoryTitle(c.parentCategory) + "  >>  " + c.name;
+    }
+    else {
+      return c.name;
+    }
+  }
  
 }

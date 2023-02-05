@@ -22,7 +22,7 @@ export class OffersService {
   }
 
   public findAll() {
-    return this.http.get<Offer[]>(this.baseUrl);
+    return this.http.get<Offer[]>(this.baseUrl + '/existing');
   }
 
   public findByProductName(content: string) {
@@ -31,5 +31,13 @@ export class OffersService {
 
   public findByCategoryId(id: number) {
     return this.http.get<Offer[]>(this.baseUrl + '/idCategory/' + id);
+  }
+
+  public findByUserId(id: number) {
+    return this.http.get<Offer[]>(this.baseUrl + '/idUser/' + id);
+  }
+
+  public updateOffer(offer: Offer) {
+    return this.http.put<Offer>(this.baseUrl + '/' + offer.id, offer);
   }
 }

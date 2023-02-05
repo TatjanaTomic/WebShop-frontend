@@ -4,6 +4,7 @@ import { ActivationComponent } from './auth/activation/activation.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { MyOffersComponent } from './home/my-offers/my-offers.component';
 import { OfferDetailsComponent } from './home/offer-details/offer-details.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { SendMessageComponent } from './home/send-message/send-message/send-message.component';
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'details',
     component: OfferDetailsComponent
+  },
+  {
+    path: 'my-offers',
+    component: MyOffersComponent,
+    canActivate: [GuardService]
   },
   {
     path: '',
