@@ -39,15 +39,19 @@ export class SendMessageComponent implements OnInit {
       let currentDateTime = this.datePipe.transform((new Date), 'MM/dd/yyyy h:mm:ss');
       let message = new Message(content, this.senderId, currentDateTime);
 
-      this.messageService.insert(message).subscribe({
-        next: (result: Message) => {
-          this.toast.success("Poruka je uspješno poslana!");
-          this.router.navigate(['/home']);
-        },
-        error: (response: HttpErrorResponse) => {
-          this.toast.error("Došlo je do greške prilikom slanja poruke! Pokušajte ponovo.");
-        }
-      });
+      if(content == null) {
+        this.toast.warning("Unesite tekst poruke!");
+      }
+      else {
+        this.messageService.insert(message).subscribe({
+          next: (result: Message) => {
+            this.toast.success("Poruka je uspješno poslana!");
+            this.router.navigate(['/home']);
+          },
+          error: (response: HttpErrorResponse) => {
+            this.toast.error("Došlo je do greške prilikom slanja poruke! Pokušajte ponovo.");
+          }
+        });
+      }
     }
-
 }

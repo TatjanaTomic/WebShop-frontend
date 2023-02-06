@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/models/Category';
 import { MyComment } from 'src/app/models/MyComment';
 import { Offer } from 'src/app/models/Offer';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { CategoriesService } from 'src/app/services/categories-service/categories.service';
 import { CommentsService } from 'src/app/services/comments-service/comments.service';
@@ -21,6 +22,7 @@ export class OfferDetailsComponent implements OnInit {
   public offer: Offer|null = null;
   public comments: MyComment[] = [];
   public userSignedIn: boolean = false;
+  public user: User|null = null;
 
   public commentForm: FormGroup = new FormGroup({});
 
@@ -36,6 +38,7 @@ export class OfferDetailsComponent implements OnInit {
     this.commentForm = this.formBuilder.group({
       comment: [null, Validators.required]
     });
+    this.user = this.authService.activeUser;
     this.userSignedIn = this.authService.isSignedIn && this.authService.isActivated;
   }
 
@@ -66,6 +69,7 @@ export class OfferDetailsComponent implements OnInit {
   }
   
   public buyProduct(offer: Offer) {
-    
+    this.offersService.setOffer(offer);
+    this.router.navigate(['/purchase']);
   }
 }

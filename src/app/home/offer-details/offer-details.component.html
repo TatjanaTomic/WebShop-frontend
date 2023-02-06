@@ -14,7 +14,8 @@
                 <h4>Adresa: {{offer.product.address}}</h4>
                 <h4>Kontakt: {{offer.product.contact}}</h4>
                 <p>Detaljan opis: {{offer.product.description}}</p>
-                <button class="btn btn-success" (click)="buyProduct(offer)">Kupi proizvod</button>
+                <p *ngIf="user && offer.idUser===user.id">* Ne možete kupiti svoj proizvod.</p>
+                <button class="btn btn-success" *ngIf="userSignedIn && user && offer.idUser!=user.id" (click)="buyProduct(offer)">Kupi proizvod</button>
             </div>
 
             <div class="images">

@@ -3,10 +3,11 @@
     <div class="left">
         
         <a mat-button routerLink="/my-offers" >Moje ponude</a>
+        <a mat-button routerLink="/my-purchases" >Moje kupovine</a>
 
         <div class="img-container">
             <img src={{user.avatar}} *ngIf="user && user.avatar!=null"/>
-            <img src="../../../assets/product-photo.png" *ngIg="user.avatar==null"/>
+            <img src="../../../assets/product-photo.png" *ngIf="user && user.avatar==null"/>
         </div>
     
         <h1 class="centeredTitle profileTitle">Promjena lozinke</h1>

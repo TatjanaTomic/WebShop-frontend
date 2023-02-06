@@ -1,0 +1,21 @@
+<a mat-button routerLink="/profile">Profil</a>
+
+<h1>Pregled ličnih kupovina</h1>
+
+<div class="offers-container">
+    <p class="emptyData" *ngIf="myPurchases.length === 0">Nema podataka za prikaz.</p>
+          <div *ngFor="let p of myPurchases" class="my-card-wrapper">
+              <div class="card h-100 my-card">
+                  <img src={{p.offer.product.images[0].url}} class="card-img-top my-card-image" *ngIf="p.offer.product.images[0]">
+                  <img src="../../../assets/product-photo.png" class="card-img-top my-card-image" *ngIf="!p.offer.product.images[0]">
+                  
+                  <div class="card-body">
+                      <h4><b>{{ p.offer.product.name }}</b></h4>
+                      <h4>Kategorija: {{getCategoryTitle(p.offer.product.category)}}</h4>
+                      <h4>Datum i vrijeme: {{p.dateTime}}</h4>
+                      <h5>{{ p.offer.product.price }}KM</h5>
+                      
+                   </div>
+              </div>
+          </div>
+  </div>

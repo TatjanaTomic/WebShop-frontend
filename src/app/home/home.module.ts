@@ -15,6 +15,8 @@ import { SendMessageComponent } from './send-message/send-message/send-message.c
 import { ProfileComponent } from './profile/profile.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MyOffersComponent } from './my-offers/my-offers.component';
+import { PurchaseComponent } from './purchase/purchase.component';
+import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
 
 
 
@@ -27,6 +29,8 @@ import { MyOffersComponent } from './my-offers/my-offers.component';
     SendMessageComponent,
     ProfileComponent,
     MyOffersComponent,
+    PurchaseComponent,
+    MyPurchasesComponent,
   ],
   imports: [
     BrowserModule,
