@@ -37,7 +37,7 @@ export class OfferDetailsComponent implements OnInit {
       this.offer = value;
       if(value.id) 
         this.getComments(value.id);
-        this.getAttributesValues(value.product.id);
+        if(value.product.id) this.getAttributesValues(value.product.id);
     });
     this.commentForm = this.formBuilder.group({
       comment: [null, Validators.required]

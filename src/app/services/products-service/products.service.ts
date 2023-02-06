@@ -24,8 +24,8 @@ export class ProductsService {
 
   public add(product: Product) {
     return this.http.post<Product>(this.baseUrl, product);
-  }
-  
+  } 
+
   public getAttributesValues(idProduct: number) {
     return this.http.get<AttributeValue[]>(this.baseUrl + '/attributes-values/' + idProduct);
   }
