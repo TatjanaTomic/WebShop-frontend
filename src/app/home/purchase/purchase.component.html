@@ -11,7 +11,8 @@
                 <input type="text" class="form-control" formControlName="price" name="price" id="price" readonly>
             </div>
             <div class="col-12">
-                <select formControlName="select" class="form-select form-select mb-3" (change)="selectChangeHandler($event)" required>
+                <label for="select" class="form-label">Način plaćanja</label>
+                <select formControlName="select" id="select" class="form-select form-select mb-3" (change)="selectChangeHandler($event)" required>
                     <option *ngFor="let t of paymentTypes" value={{t.name}}>{{t.name}}</option>
                 </select>
             </div>

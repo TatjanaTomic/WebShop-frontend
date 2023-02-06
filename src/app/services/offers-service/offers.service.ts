@@ -40,4 +40,8 @@ export class OffersService {
   public updateOffer(offer: Offer) {
     return this.http.put<Offer>(this.baseUrl + '/' + offer.id, offer);
   }
+
+  public addNew(offer: Offer) {
+    return this.http.post<Offer>(this.baseUrl, offer);
+  }
 }

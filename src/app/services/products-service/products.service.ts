@@ -16,4 +16,12 @@ export class ProductsService {
   public findAll() {
     return this.http.get<Product[]>(this.baseUrl);
   }
+
+  public findById(id: number) {
+    return this.http.get<Product>(this.baseUrl + '/' + id);
+  }
+
+  public add(product: Product) {
+    return this.http.post<Product>(this.baseUrl, product);
+  } 
 }

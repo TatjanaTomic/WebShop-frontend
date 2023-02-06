@@ -16,14 +16,13 @@
                 <p>Detaljan opis: {{offer.product.description}}</p>
                 <p *ngIf="user && offer.idUser===user.id">* Ne možete kupiti svoj proizvod.</p>
                 <button class="btn btn-success" *ngIf="userSignedIn && user && offer.idUser!=user.id" (click)="buyProduct(offer)">Kupi proizvod</button>
-            </div>
-
-            <div class="images">
-                <div class="image-card" *ngFor="let im of offer.product.images">
-                    <img src={{im.url}}>
+                
+                <div class="images">
+                    <div class="image-card" *ngFor="let im of offer.product.images">
+                        <img src={{im.url}}>
+                    </div>
                 </div>
             </div>
-
         </div>
 
         <div class="comments" *ngIf="comments">
@@ -41,6 +40,7 @@
             </div>
 
             <h1 class="commentTitle">Komentari</h1>
+            <p *ngIf="comments.length === 0">Nema podataka za prikaz.</p>
                 <div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor="let comm of comments">
                     <div class="card-header">{{ comm.userAccount.username }}</div>
                     <div class="card-body">

@@ -2,7 +2,7 @@ import { Category } from "./Category";
 import { Image } from "./Image";
 
 export class Product {
-    id: number;
+    id: number|null;
     name: string;
     description: string;
     price: number;
@@ -12,7 +12,7 @@ export class Product {
     address: string;
     images: Image[];
 
-    constructor(id: number, name: string, description: string, price: number, isNew: boolean,
+    constructor(id: number|null, name: string, description: string, price: number, isNew: boolean,
         contact: string, category: Category, address: string, images: Image[]) {
         this.id = id;
         this.name = name;
