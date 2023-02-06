@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MyOffersComponent } from './my-offers/my-offers.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
+import { NewOfferComponent } from './new-offer/new-offer.component';
 
 
 
@@ -31,6 +32,7 @@ import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
     MyOffersComponent,
     PurchaseComponent,
     MyPurchasesComponent,
+    NewOfferComponent,
   ],
   imports: [
     BrowserModule,

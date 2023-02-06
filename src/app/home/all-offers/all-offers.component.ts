@@ -7,6 +7,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { Offer } from 'src/app/models/Offer';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { CategoriesService } from 'src/app/services/categories-service/categories.service';
 import { OffersService } from 'src/app/services/offers-service/offers.service';
 
@@ -29,11 +30,14 @@ export class AllOffersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   obs: Observable<any> | undefined;
 
+  public isUserSignedIn: boolean = false;
+
   public form: FormGroup = new FormGroup({});
 
-  constructor(private offersService: OffersService, private categoriesService: CategoriesService, private formBuilder: FormBuilder, private router: Router, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private offersService: OffersService, private authService: AuthService, private categoriesService: CategoriesService, private formBuilder: FormBuilder, private router: Router, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.isUserSignedIn = this.authService.isSignedIn && this.authService.isActivated;
     this.form = this.formBuilder.group({
       content: [null, Validators.required]
     });

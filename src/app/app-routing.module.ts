@@ -6,6 +6,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { HomeComponent } from './home/home.component';
 import { MyOffersComponent } from './home/my-offers/my-offers.component';
 import { MyPurchasesComponent } from './home/my-purchases/my-purchases.component';
+import { NewOfferComponent } from './home/new-offer/new-offer.component';
 import { OfferDetailsComponent } from './home/offer-details/offer-details.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { PurchaseComponent } from './home/purchase/purchase.component';
@@ -58,6 +59,11 @@ const routes: Routes = [
   {
     path: 'my-purchases',
     component: MyPurchasesComponent,
+    canActivate: [GuardService]
+  },
+  {
+    path: 'new-offer',
+    component: NewOfferComponent,
     canActivate: [GuardService]
   },
   {
