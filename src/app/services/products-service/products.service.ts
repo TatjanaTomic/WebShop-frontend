@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AttributeValue } from 'src/app/models/AttributeValue';
 import { Product } from 'src/app/models/Product';
 
 @Injectable({
@@ -15,5 +16,9 @@ export class ProductsService {
 
   public findAll() {
     return this.http.get<Product[]>(this.baseUrl);
+  }
+
+  public getAttributesValues(idProduct: number) {
+    return this.http.get<AttributeValue[]>(this.baseUrl + '/attributes-values/' + idProduct);
   }
 }

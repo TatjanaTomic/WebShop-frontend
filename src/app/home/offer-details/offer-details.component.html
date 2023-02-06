@@ -6,24 +6,27 @@
     <div class="details-row">
         <div class="details">
             <div class="details-content">
-                <h1>Proizvod: {{offer.product.name}}</h1>
-                <h2>Cijena: {{offer.product.price}}KM</h2>
-                <h3 *ngIf="offer.product.isNew">Stanje: NOVO</h3>
-                <h3 *ngIf="!offer.product.isNew">Stanje: KORISTENO</h3>
-                <h3>Kategorija: {{getCategoryName(offer.product.category)}}</h3>
-                <h4>Adresa: {{offer.product.address}}</h4>
-                <h4>Kontakt: {{offer.product.contact}}</h4>
-                <p>Detaljan opis: {{offer.product.description}}</p>
-                <p *ngIf="user && offer.idUser===user.id">* Ne možete kupiti svoj proizvod.</p>
-                <button class="btn btn-success" *ngIf="userSignedIn && user && offer.idUser!=user.id" (click)="buyProduct(offer)">Kupi proizvod</button>
-            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Proizvod: {{offer.product.name}}</li>
+                    <li class="list-group-item">Cijena: {{offer.product.price}}KM</li>
+                    <li class="list-group-item" *ngIf="offer.product.isNew">Stanje: NOVO</li>
+                    <li class="list-group-item" *ngIf="!offer.product.isNew">Stanje: KORISTENO</li>
+                    <li class="list-group-item">Adresa: {{offer.product.address}}</li>
+                    <li class="list-group-item">Kontakt: {{offer.product.contact}}</li>
+                    <li class="list-group-item">Detaljan opis: {{offer.product.description}}</li>
+                    <li class="list-group-item" *ngIf="user && offer.idUser===user.id">* Ne možete kupiti svoj proizvod.</li>
+                    <li class="list-group-item">Kategorija: {{getCategoryName(offer.product.category)}}</li>
 
-            <div class="images">
-                <div class="image-card" *ngFor="let im of offer.product.images">
-                    <img src={{im.url}}>
+                    <li class="list-group-item" *ngFor="let av of attributes">{{av.attributeName}}: {{av.valueValue}}</li>
+                </ul>
+                <button class="btn btn-success" *ngIf="userSignedIn && user && offer.idUser!=user.id" (click)="buyProduct(offer)">Kupi proizvod</button>
+            
+                <div class="images">
+                    <div class="image-card" *ngFor="let im of offer.product.images">
+                        <img src={{im.url}}>
+                    </div>
                 </div>
             </div>
-
         </div>
 
         <div class="comments" *ngIf="comments">
@@ -41,6 +44,7 @@
             </div>
 
             <h1 class="commentTitle">Komentari</h1>
+                <p *ngIf="comments.length === 0">Nema podataka za prikaz.</p>
                 <div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor="let comm of comments">
                     <div class="card-header">{{ comm.userAccount.username }}</div>
                     <div class="card-body">

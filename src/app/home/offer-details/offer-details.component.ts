@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AttributeValue } from 'src/app/models/AttributeValue';
 import { Category } from 'src/app/models/Category';
 import { MyComment } from 'src/app/models/MyComment';
 import { Offer } from 'src/app/models/Offer';
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { CategoriesService } from 'src/app/services/categories-service/categories.service';
 import { CommentsService } from 'src/app/services/comments-service/comments.service';
 import { OffersService } from 'src/app/services/offers-service/offers.service';
+import { ProductsService } from 'src/app/services/products-service/products.service';
 
 @Component({
   selector: 'app-offer-details',
@@ -23,10 +25,11 @@ export class OfferDetailsComponent implements OnInit {
   public comments: MyComment[] = [];
   public userSignedIn: boolean = false;
   public user: User|null = null;
+  public attributes: AttributeValue[] = [];
 
   public commentForm: FormGroup = new FormGroup({});
 
-  constructor(private offersService: OffersService, private categoriesService: CategoriesService, private commentsService: CommentsService, private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private toast: ToastrService) {
+  constructor(private offersService: OffersService, private productsService: ProductsService, private categoriesService: CategoriesService, private commentsService: CommentsService, private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private toast: ToastrService) {
   }
 
   ngOnInit() : void {
@@ -34,6 +37,7 @@ export class OfferDetailsComponent implements OnInit {
       this.offer = value;
       if(value.id) 
         this.getComments(value.id);
+        this.getAttributesValues(value.product.id);
     });
     this.commentForm = this.formBuilder.group({
       comment: [null, Validators.required]
@@ -44,6 +48,10 @@ export class OfferDetailsComponent implements OnInit {
 
   private getComments(id:number) {
     this.commentsService.findCommentsByOfferId(id).subscribe((result) => this.comments = result);
+  }
+
+  private getAttributesValues(idProduct: number) {
+    this.productsService.getAttributesValues(idProduct).subscribe(data => this.attributes = data);
   }
 
   public saveComment() {
