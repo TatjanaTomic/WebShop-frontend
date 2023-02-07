@@ -82,14 +82,12 @@ export class NewOfferComponent {
           this.attributesForm = new FormGroup({});
           this.attributes.forEach(attr => this.attributesForm.addControl(attr.name, new FormControl('')));
       });
-    
     } 
-    
   }
 
   isNewChecked(event: any) {
     this.isNew = event.target.checked;
-}
+  }
 
   public save() {
     
@@ -107,11 +105,8 @@ export class NewOfferComponent {
     let image5 = this.form.value.image5;
 
     if(category && this.activeUser && this.activeUser.id) {
-      console.log('test 2');
       let userId = this.activeUser.id;
       let newProduct = new Product(null, name, description, price, isNew, contact, category, address, []);
-
-      console.log(newProduct);
       
       this.productsService.add(newProduct).subscribe({
         next: (result: Product) => {
@@ -122,16 +117,14 @@ export class NewOfferComponent {
           if(image5) this.imagesService.save(new ImageRequest(null, image5, result)).pipe(delay(200)).subscribe();
 
           if(result.id) {
-            let newProductUpdated = this.productsService.findById(result.id).pipe(delay(1000)).subscribe({
+            this.productsService.findById(result.id).pipe(delay(1000)).subscribe({
               next: (result: Product) => {
 
                 this.offersService.addNew(new Offer(null, userId, result, true, false)).subscribe({
                   next: (result:Offer) => {
 
                     for(let a of this.attributes) {
-                      let input = this.attributesForm.get(a.name)?.value;   
-                      console.log(input);
-                                         
+                      let input = this.attributesForm.get(a.name)?.value;                                          
                       
                       if(input && result.product.id) {
                           this.productsService.addValue(new Value(result.product.id, a.id, result.product.category.id, input)).pipe(delay(200)).subscribe();
@@ -153,8 +146,6 @@ export class NewOfferComponent {
             });
 
           }
-
-
             
         },
         error: () => {
