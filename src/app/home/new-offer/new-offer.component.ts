@@ -1,15 +1,18 @@
 import { provideCloudflareLoader } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { throwMatDuplicatedDrawerError } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay } from 'rxjs';
+import { Attribute } from 'src/app/models/Attribute';
 import { Category } from 'src/app/models/Category';
 import { Image } from 'src/app/models/Image';
 import { ImageRequest } from 'src/app/models/ImageRequest';
 import { Offer } from 'src/app/models/Offer';
 import { Product } from 'src/app/models/Product';
 import { User } from 'src/app/models/User';
+import { Value } from 'src/app/models/Value';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { CategoriesService } from 'src/app/services/categories-service/categories.service';
 import { ImagesService } from 'src/app/services/images-service/images.service';
@@ -29,6 +32,7 @@ export class NewOfferComponent {
   public selectedCategoryId: number = 0;
   public selectedCategory: Category|undefined;
   public isNew: boolean = false;
+  public attributes: Attribute[] = [];
 
   public activeUser : User|null = null;
 
@@ -63,11 +67,22 @@ export class NewOfferComponent {
 
   public returnName(c: Category): string {
     return this.categoriesService.getCategoryTitle(c);
-  }
+  } 
 
   selectChangeHandler (event: any) {
     this.selectedCategoryId = event.target.value;
     this.selectedCategory = this.categories.find(t => t.id == this.selectedCategoryId);
+    if(this.selectedCategory) {
+      this.categoriesService.getCategoryAttributes(this.selectedCategory.id).subscribe(
+        data=>{
+          this.attributes=data;
+          for(let a of this.attributes) {
+            this.form.addControl;
+          }
+      });
+    
+    } 
+    
   }
 
   isNewChecked(event: any) {
@@ -75,7 +90,6 @@ export class NewOfferComponent {
 }
 
   public save() {
-    console.log('testtttttt');
     
     let name = this.form.value.name;
     let description = this.form.value.description;
@@ -89,9 +103,6 @@ export class NewOfferComponent {
     let image3 = this.form.value.image3;
     let image4 = this.form.value.image4;
     let image5 = this.form.value.image5;
-
-    console.log(category);
-    
 
     if(category && this.activeUser && this.activeUser.id) {
       console.log('test 2');
@@ -113,7 +124,16 @@ export class NewOfferComponent {
               next: (result: Product) => {
 
                 this.offersService.addNew(new Offer(null, userId, result, true, false)).subscribe({
-                  next: () => {
+                  next: (result:Offer) => {
+
+                    for(let a of this.attributes) {
+                      let input = this.form.get(a.name)?.value;
+                      console.log(input);
+                      if(input && result.product.id) {
+                          this.productsService.addValue(new Value(result.product.id, a.id, result.product.category.id, input)).pipe(delay(200)).subscribe();
+                      }
+                    }
+
                     this.toast.success("Uspješno ste dodali novu ponudu!");
                     this.router.navigate(['/home']);
                   },

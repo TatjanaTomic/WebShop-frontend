@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Attribute } from 'src/app/models/Attribute';
 import { Category } from 'src/app/models/Category';
 
 @Injectable({
@@ -19,6 +20,10 @@ export class CategoriesService {
 
   public findById(id: number) {
     return this.http.get<Category>(this.baseUrl + '/' + id);
+  }
+
+  public getCategoryAttributes(idCategory: number) {
+    return this.http.get<Attribute[]>('http://localhost:9000/api/v1/attributes/idCategory/' + idCategory);
   }
 
   public getCategoryTitle(c: Category): string {

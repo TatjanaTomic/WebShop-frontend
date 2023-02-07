@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AttributeValue } from 'src/app/models/AttributeValue';
 import { Product } from 'src/app/models/Product';
+import { Value } from 'src/app/models/Value';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class ProductsService {
 
   public getAttributesValues(idProduct: number) {
     return this.http.get<AttributeValue[]>(this.baseUrl + '/attributes-values/' + idProduct);
+  }
+
+  public addValue(value: Value) {
+    return this.http.post<Value>('http://localhost:9000/api/v1/values', value);
   }
 }

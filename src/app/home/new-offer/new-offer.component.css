@@ -1,13 +1,6 @@
-.myContainer {
+.newOfferContainer {
     width: 90%;
     margin: 0 auto;
-}
-
-.formNewOffer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 h1 {

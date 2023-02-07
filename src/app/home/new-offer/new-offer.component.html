@@ -1,6 +1,5 @@
-<a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
-            
-<div class="myContainer">
+<div class="newOfferContainer">
+    <a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
     <h1>Nova ponuda</h1>
 
     <form [formGroup]="form" class="row g-3 myForm">
@@ -29,7 +28,11 @@
                     <option *ngFor="let t of selectElemenValues" value={{t.catId}}>{{t.catTitle}}</option>
                 </select>
             </div>
-        
+
+            <div class="col-12" *ngFor="let a of attributes">
+                <input type="text" class="form-control" formControlName={{a.name}} id={{a.name}} placeholder={{a.name}}>
+            </div>
+            
             <div class="col-12">
                 <input type="text" class="form-control" formControlName="image1" id="image1" placeholder="Slika 1">
             </div>
