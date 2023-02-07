@@ -1,4 +1,4 @@
-import { provideCloudflareLoader } from '@angular/common';
+import { getLocaleFirstDayOfWeek, provideCloudflareLoader } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwMatDuplicatedDrawerError } from '@angular/material/sidenav';
@@ -26,6 +26,8 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 })
 export class NewOfferComponent {
   public form: FormGroup = new FormGroup({});
+  public attributesForm: FormGroup = new FormGroup({});
+
   public categories: Category[] = [];
   public selectElemenValues: {catTitle: string, catId: number}[] = [];
 
@@ -61,7 +63,8 @@ export class NewOfferComponent {
       image2: [null],
       image3: [null],
       image4: [null],
-      image5: [null]
+      image5: [null],
+      attributes: this.attributesForm
     });
   }
 
@@ -76,9 +79,8 @@ export class NewOfferComponent {
       this.categoriesService.getCategoryAttributes(this.selectedCategory.id).subscribe(
         data=>{
           this.attributes=data;
-          for(let a of this.attributes) {
-            this.form.addControl;
-          }
+          this.attributesForm = new FormGroup({});
+          this.attributes.forEach(attr => this.attributesForm.addControl(attr.name, new FormControl('')));
       });
     
     } 
@@ -127,8 +129,10 @@ export class NewOfferComponent {
                   next: (result:Offer) => {
 
                     for(let a of this.attributes) {
-                      let input = this.form.get(a.name)?.value;
+                      let input = this.attributesForm.get(a.name)?.value;   
                       console.log(input);
+                                         
+                      
                       if(input && result.product.id) {
                           this.productsService.addValue(new Value(result.product.id, a.id, result.product.category.id, input)).pipe(delay(200)).subscribe();
                       }

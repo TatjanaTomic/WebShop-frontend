@@ -2,7 +2,9 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Mail } from 'src/app/models/Mail';
 import { User } from 'src/app/models/User';
+import { EmailService } from '../email-service/email.service';
 import { UsersService } from '../users-service/users.service';
 
 @Injectable({
@@ -15,7 +17,7 @@ export class AuthService {
   public isActivated: boolean = false;
   public users: User[] = [];
 
-  constructor(private usersService: UsersService, private router: Router, private toast: ToastrService) {
+  constructor(private usersService: UsersService, private router: Router, private toast: ToastrService, private emailService: EmailService) {
     this.usersService.findAll().subscribe(data => { this.users = data; });
   }
 
@@ -59,7 +61,7 @@ export class AuthService {
         this.isSignedIn = true;
         this.isActivated = false;
 
-        //TODO : Posalji mail
+        this.emailService.send(new Mail(result.mail, result.pin)).subscribe();
         this.toast.success("Uspješno ste se registrovali!");
         this.router.navigate(['/activation']);
       },
@@ -120,7 +122,7 @@ export class AuthService {
       this.activeUser.pin = newPin;
       this.usersService.update(this.activeUser).subscribe({
         next: (result: User) => {
-          //TODO : Posalji mail
+          this.emailService.send(new Mail(result.mail, result.pin)).subscribe();
           this.activeUser = result;
           this.toast.warning("Morate da aktivirate nalog! Unesite novi PIN!");
           this.router.navigate(['/activation']);

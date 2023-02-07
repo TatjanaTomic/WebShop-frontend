@@ -29,9 +29,11 @@
                 </select>
             </div>
 
-            <div class="col-12" *ngFor="let a of attributes">
-                <input type="text" class="form-control" formControlName={{a.name}} id={{a.name}} placeholder={{a.name}}>
-            </div>
+            <form [formGroup]="attributesForm" class="row g-3">
+                <div class="col-12" *ngFor="let a of attributes">
+                    <input type="text" class="form-control" formControlName={{a.name}} id={{a.name}} placeholder={{a.name}}>
+                </div>
+            </form>
             
             <div class="col-12">
                 <input type="text" class="form-control" formControlName="image1" id="image1" placeholder="Slika 1">

@@ -27,7 +27,5 @@ export class LoginComponent implements OnInit {
     let password: string = this.form.value.password;
 
     this.authService.loginUser(username, password);
-
-    //this.emailService.send(new Mail("tatjanatomic997@yahoo.com", "hello")).subscribe();
   }
 }
