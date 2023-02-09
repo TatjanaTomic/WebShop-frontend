@@ -11,24 +11,22 @@ import { RouterModule } from '@angular/router';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { AppRoutingModule } from '../app-routing.module';
 
-
-
 @NgModule({
-  declarations: [
-    ActivationComponent,
-    LoginComponent,
-    RegistrationComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    AppMaterialModule,
-    HttpClientModule
-  ]
+	declarations: [
+		ActivationComponent,
+		LoginComponent,
+		RegistrationComponent
+	],
+	imports: [
+		BrowserModule,
+		RouterModule,
+		AppRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		BrowserAnimationsModule,
+		CommonModule,
+		AppMaterialModule,
+		HttpClientModule
+	]
 })
 export class AuthModule { }

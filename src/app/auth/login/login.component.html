@@ -3,12 +3,11 @@
     <div class="centeredForm">
         <form [formGroup]="form" class="row g-3 myForm">
             <div class="col-12">
-              <input type="text" class="form-control" formControlName="username" id="username" required placeholder="Korisničko ime">
+                <input type="text" class="form-control" formControlName="username" id="username" required placeholder="Korisničko ime">
             </div>
             <div class="col-12">
                 <input type="password" class="form-control" formControlName="password" id="password" required placeholder="Lozinka">
             </div>
-    
             <div class="d-grid gap-2 col-8 mx-auto">
                 <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="login()">Prijavite se</button>
                 <a class="text-dark btn btn-link" routerLink="/registration" >Nemate nalog? Registrujte se...</a>
@@ -16,5 +15,4 @@
             </div>
         </form>
     </div>
-
 </div>

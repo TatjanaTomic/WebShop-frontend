@@ -1,15 +1,11 @@
 <div class="rowContainer">
-
     <div class="left">
-        
-        <a mat-button routerLink="/my-offers" >Moje ponude</a>
-        <a mat-button routerLink="/my-purchases" >Moje kupovine</a>
-
+        <a mat-button routerLink="/my-offers">Moje ponude</a>
+        <a mat-button routerLink="/my-purchases">Moje kupovine</a>
         <div class="img-container">
             <img src={{user.avatar}} *ngIf="user && user.avatar!=null"/>
             <img src="../../../assets/product-photo.png" *ngIf="user && user.avatar==null"/>
         </div>
-    
         <h1 class="centeredTitle profileTitle">Promjena lozinke</h1>
         <div class="centeredForm">
             <form [formGroup]="passwordForm" class="row g-3 myForm passwordForm">
@@ -19,7 +15,6 @@
                 <div class="col-12">
                     <input type="password" class="form-control" formControlName="password2" id="password2" required placeholder="Ponovljena lozinka">
                 </div>
-            
                 <div class="d-grid gap-2 col-8 mx-auto">
                     <button class="btn btn-warning btn-lg" [disabled]="passwordForm.invalid" (click)="savePassword()">Sačuvaj lozinku</button>
                 </div>
@@ -29,7 +24,6 @@
     
     <div class="right">
         <a class="text-dark btn btn-link myLink" routerLink="/home">Početna stranica...</a>
-
         <h1 class="centeredTitle profileTitle">Izmjena ličnih podataka</h1>
         <div class="centeredForm">
             <form [formGroup]="form" class="row g-3 myForm profileForm">
@@ -57,7 +51,6 @@
                     <label for="avatar" class="form-label">Avatar</label>
                     <input type="text" class="form-control" formControlName="avatar" id="avatar">
                 </div>
-        
                 <div class="d-grid gap-2 col-8 mx-auto">
                     <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="saveUserInfo()">Sačuvaj podatke</button>
                 </div>

@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AllOffersComponent } from './all-offers.component';
 
 describe('AllOffersComponent', () => {
-  let component: AllOffersComponent;
-  let fixture: ComponentFixture<AllOffersComponent>;
+	let component: AllOffersComponent;
+	let fixture: ComponentFixture<AllOffersComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AllOffersComponent ]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [AllOffersComponent]
+		})
+			.compileComponents();
 
-    fixture = TestBed.createComponent(AllOffersComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(AllOffersComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

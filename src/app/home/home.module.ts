@@ -11,7 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SendMessageComponent } from './send-message/send-message/send-message.component';
+import { SendMessageComponent } from './send-message/send-message.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MyOffersComponent } from './my-offers/my-offers.component';
@@ -19,36 +19,34 @@ import { PurchaseComponent } from './purchase/purchase.component';
 import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
 import { NewOfferComponent } from './new-offer/new-offer.component';
 
-
-
 @NgModule({
-  declarations: [
-    HomeComponent,
-    AllOffersComponent,
-    OfferDetailsComponent,
-    HeaderComponent,
-    SendMessageComponent,
-    ProfileComponent,
-    MyOffersComponent,
-    PurchaseComponent,
-    MyPurchasesComponent,
-    NewOfferComponent,
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    AppMaterialModule,
-    HttpClientModule,
-    ToastrModule.forRoot({
-      timeOut: 2000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-    })
-  ]
+	declarations: [
+		HomeComponent,
+		AllOffersComponent,
+		OfferDetailsComponent,
+		HeaderComponent,
+		SendMessageComponent,
+		ProfileComponent,
+		MyOffersComponent,
+		PurchaseComponent,
+		MyPurchasesComponent,
+		NewOfferComponent,
+	],
+	imports: [
+		BrowserModule,
+		RouterModule,
+		AppRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		BrowserAnimationsModule,
+		CommonModule,
+		AppMaterialModule,
+		HttpClientModule,
+		ToastrModule.forRoot({
+			timeOut: 2000,
+			positionClass: 'toast-top-right',
+			preventDuplicates: true,
+		})
+	]
 })
 export class HomeModule { }

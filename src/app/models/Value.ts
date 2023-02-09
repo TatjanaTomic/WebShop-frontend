@@ -1,13 +1,13 @@
 export class Value {
-    idProduct: number;
-    idAttribute: number;
-    idCategory: number;
-    value: string;
+	idProduct: number;
+	idAttribute: number;
+	idCategory: number;
+	value: string;
 
-    constructor(idProduct: number, idAttribute: number, idCategory: number, value: string) {
-        this.idProduct = idProduct;
-        this.idAttribute = idAttribute;
-        this.idCategory = idCategory;
-        this.value = value;
-    }
+	constructor(idProduct: number, idAttribute: number, idCategory: number, value: string) {
+		this.idProduct = idProduct;
+		this.idAttribute = idAttribute;
+		this.idCategory = idCategory;
+		this.value = value;
+	}
 }

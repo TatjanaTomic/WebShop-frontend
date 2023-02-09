@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,69 +14,77 @@ import { OffersService } from 'src/app/services/offers-service/offers.service';
 import { ProductsService } from 'src/app/services/products-service/products.service';
 
 @Component({
-  selector: 'app-offer-details',
-  templateUrl: './offer-details.component.html',
-  styleUrls: ['./offer-details.component.css']
+	selector: 'app-offer-details',
+	templateUrl: './offer-details.component.html',
+	styleUrls: ['./offer-details.component.css']
 })
 export class OfferDetailsComponent implements OnInit {
 
-  public offer: Offer|null = null;
-  public comments: MyComment[] = [];
-  public userSignedIn: boolean = false;
-  public user: User|null = null;
-  public attributes: AttributeValue[] = [];
+	public offer: Offer | null = null;
+	public comments: MyComment[] = [];
+	public userSignedIn: boolean = false;
+	public user: User | null = null;
+	public attributes: AttributeValue[] = [];
 
-  public commentForm: FormGroup = new FormGroup({});
+	public commentForm: FormGroup = new FormGroup({});
 
-  constructor(private offersService: OffersService, private productsService: ProductsService, private categoriesService: CategoriesService, private commentsService: CommentsService, private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private toast: ToastrService) {
-  }
+	constructor(
+		private offersService: OffersService,
+		private productsService: ProductsService,
+		private categoriesService: CategoriesService,
+		private commentsService: CommentsService,
+		private authService: AuthService,
+		private router: Router,
+		private formBuilder: FormBuilder,
+		private toast: ToastrService
+	) { }
 
-  ngOnInit() : void {
-    this.offersService.offer.subscribe((value: Offer) => {
-      this.offer = value;
-      if(value.id) 
-        this.getComments(value.id);
-        if(value.product.id) this.getAttributesValues(value.product.id);
-    });
-    this.commentForm = this.formBuilder.group({
-      comment: [null, Validators.required]
-    });
-    this.user = this.authService.activeUser;
-    this.userSignedIn = this.authService.isSignedIn && this.authService.isActivated;
-  }
+	ngOnInit(): void {
+		this.offersService.offer.subscribe((value: Offer) => {
+			this.offer = value;
+			if (value.id)
+				this.getComments(value.id);
+			if (value.product.id) this.getAttributesValues(value.product.id);
+		});
+		this.commentForm = this.formBuilder.group({
+			comment: [null, Validators.required]
+		});
+		this.user = this.authService.activeUser;
+		this.userSignedIn = this.authService.isSignedIn && this.authService.isActivated;
+	}
 
-  private getComments(id:number) {
-    this.commentsService.findCommentsByOfferId(id).subscribe((result) => this.comments = result);
-  }
+	private getComments(id: number) {
+		this.commentsService.findCommentsByOfferId(id).subscribe((result) => this.comments = result);
+	}
 
-  private getAttributesValues(idProduct: number) {
-    this.productsService.getAttributesValues(idProduct).subscribe(data => this.attributes = data);
-  }
+	private getAttributesValues(idProduct: number) {
+		this.productsService.findAttributesValues(idProduct).subscribe(data => this.attributes = data);
+	}
 
-  public saveComment() {
-    let content = this.commentForm.value.comment;
-    if(this.authService.activeUser && this.offer) {
-      let comment = new MyComment(null, content, this.authService.activeUser, this.offer);
+	public saveComment() {
+		let content = this.commentForm.value.comment;
+		if (this.authService.activeUser && this.offer) {
+			let comment = new MyComment(null, content, this.authService.activeUser, this.offer);
 
-      this.commentsService.addNew(comment).subscribe({
-        next: (result: MyComment) => {
-          this.toast.success("Komentar je uspješno poslan!");
-          if(result.offer.id) this.getComments(result.offer.id);
-          this.commentForm.reset();
-        },
-        error: (response: HttpErrorResponse) => {
-          this.toast.error("Došlo je do greške prilikom slanja komentara! Pokušajte ponovo.");
-        }
-      });
-    }
-  }
+			this.commentsService.insert(comment).subscribe({
+				next: (result: MyComment) => {
+					this.toast.success("Komentar je uspješno poslan!");
+					if (result.offer.id) this.getComments(result.offer.id);
+					this.commentForm.reset();
+				},
+				error: () => {
+					this.toast.error("Došlo je do greške prilikom slanja komentara! Pokušajte ponovo.");
+				}
+			});
+		}
+	}
 
-  public getCategoryName(c: Category): string {
-    return this.categoriesService.getCategoryTitle(c);
-  }
-  
-  public buyProduct(offer: Offer) {
-    this.offersService.setOffer(offer);
-    this.router.navigate(['/purchase']);
-  }
+	public getCategoryName(c: Category): string {
+		return this.categoriesService.getCategoryTitle(c);
+	}
+
+	public buyProduct(offer: Offer) {
+		this.offersService.setOffer(offer);
+		this.router.navigate(['/purchase']);
+	}
 }

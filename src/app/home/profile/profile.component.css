@@ -1,42 +1,42 @@
 .rowContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .right {
-    width: 60%;
+  width: 60%;
 }
 
 .profileForm {
-    width: 40vw;
+  width: 40vw;
 }
 
 .left {
-    width: 40%;
+  width: 40%;
 }
 
 .passwordForm {
-    width: 30vw;
+  width: 30vw;
 }
 
 .profileTitle {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .myLink {
-    width: 100%;
-    text-align: right;
+  width: 100%;
+  text-align: right;
 }
 
 img {
-    height: 200px;
-    width: 200px;
+  height: 200px;
+  width: 200px;
 }
 
 .img-container {
-    width: fit-content;
-    height: fit-content;
-    margin: 0 auto;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
 }

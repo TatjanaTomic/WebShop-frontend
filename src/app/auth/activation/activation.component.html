@@ -1,16 +1,14 @@
 <div class="myContainer">
-    <h1 class="centeredTitle activationTitle">IPWebShop - aktivacija</h1>
-    <div class="centeredForm">
-        <form [formGroup]="form" class="row g-3 myForm">
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="pin" id="pin" required placeholder="PIN" pattern="^[0-9]{4}$">
-            </div>
-    
-            <div class="d-grid gap-2 col-8 mx-auto">
-              <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="activate()">Aktivirajte nalog</button>
-              <a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
-            </div>
-        </form>
-    </div>
-
+	<h1 class="centeredTitle activationTitle">IPWebShop - aktivacija</h1>
+	<div class="centeredForm">
+		<form [formGroup]="form" class="row g-3 myForm">
+			<div class="col-12">
+				<input type="text" class="form-control" formControlName="pin" id="pin" required placeholder="PIN" pattern="^[0-9]{4}$">
+			</div>
+			<div class="d-grid gap-2 col-8 mx-auto">
+				<button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="activate()">Aktivirajte nalog</button>
+				<a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
+			</div>
+		</form>
+	</div>
 </div>

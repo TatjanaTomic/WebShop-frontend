@@ -26,47 +26,47 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const materialModules = [
-  CdkTreeModule,
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatPaginatorModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatFormFieldModule,
-  MatButtonToggleModule,
-  MatTreeModule,
-  OverlayModule,
-  PortalModule,
-  MatDatepickerModule,
-  MatNativeDateModule
+	CdkTreeModule,
+	MatAutocompleteModule,
+	MatButtonModule,
+	MatCardModule,
+	MatCheckboxModule,
+	MatChipsModule,
+	MatDividerModule,
+	MatExpansionModule,
+	MatIconModule,
+	MatInputModule,
+	MatListModule,
+	MatMenuModule,
+	MatProgressSpinnerModule,
+	MatPaginatorModule,
+	MatRippleModule,
+	MatSelectModule,
+	MatSidenavModule,
+	MatSnackBarModule,
+	MatSortModule,
+	MatTableModule,
+	MatTabsModule,
+	MatToolbarModule,
+	MatFormFieldModule,
+	MatButtonToggleModule,
+	MatTreeModule,
+	OverlayModule,
+	PortalModule,
+	MatDatepickerModule,
+	MatNativeDateModule
 ];
 
 @NgModule({
-  imports: [
-    ...materialModules
-  ],
-  exports: [
-    ...materialModules
-  ],
+	imports: [
+		...materialModules
+	],
+	exports: [
+		...materialModules
+	],
 })
 export class AppMaterialModule {
 }

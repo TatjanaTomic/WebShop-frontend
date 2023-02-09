@@ -1,11 +1,11 @@
 <p class="my-header">
     <mat-toolbar>
-      <span>IPWebShop</span>
-      <span class="example-spacer"></span>
-      <a mat-button routerLink="/login" *ngIf="!signedIn">Prijava</a>
-      <a mat-button routerLink="/registration" *ngIf="!signedIn">Registracija</a>
-      <a mat-button routerLink="/send-message" *ngIf="signedIn">Korisnička podrška</a>
-      <a mat-button routerLink="/profile" *ngIf="signedIn">Profil</a>
-      <button mat-button *ngIf="signedIn" (click)="logout()">Odjava</button>
+		<span>IPWebShop</span>
+		<span class="example-spacer"></span>
+		<a mat-button routerLink="/login" *ngIf="!signedIn">Prijava</a>
+		<a mat-button routerLink="/registration" *ngIf="!signedIn">Registracija</a>
+		<a mat-button routerLink="/send-message" *ngIf="signedIn">Korisnička podrška</a>
+		<a mat-button routerLink="/profile" *ngIf="signedIn">Profil</a>
+		<button mat-button *ngIf="signedIn" (click)="logout()">Odjava</button>
     </mat-toolbar>
 </p>

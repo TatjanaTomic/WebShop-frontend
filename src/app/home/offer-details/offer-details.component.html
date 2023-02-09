@@ -2,7 +2,6 @@
     <div class="first-row">
         <a class="text-dark btn btn-link myLink" routerLink="/home">Početna stranica...</a>
     </div>
-    
     <div class="details-row">
         <div class="details">
             <div class="details-content">
@@ -14,13 +13,11 @@
                     <li class="list-group-item">Adresa: {{offer.product.address}}</li>
                     <li class="list-group-item">Kontakt: {{offer.product.contact}}</li>
                     <li class="list-group-item">Detaljan opis: {{offer.product.description}}</li>
-                    <li class="list-group-item" *ngIf="user && offer.idUser===user.id">* Ne možete kupiti svoj proizvod.</li>
                     <li class="list-group-item">Kategorija: {{getCategoryName(offer.product.category)}}</li>
-
                     <li class="list-group-item" *ngFor="let av of attributes">{{av.attributeName}}: {{av.valueValue}}</li>
+                    <li class="list-group-item" *ngIf="user && offer.idUser===user.id">* Ne možete kupiti svoj proizvod.</li>
                 </ul>
                 <button class="btn btn-success" *ngIf="userSignedIn && user && offer.idUser!=user.id" (click)="buyProduct(offer)">Kupi proizvod</button>
-            
                 <div class="images">
                     <div class="image-card" *ngFor="let im of offer.product.images">
                         <img src={{im.url}}>
@@ -31,28 +28,25 @@
 
         <div class="comments" *ngIf="comments">
             <div class="newComment" *ngIf="userSignedIn">
-            <h1>Novi komentar</h1>
-                <form [formGroup]="commentForm" class="row g-3">
-                    <div class="col-12">
-                        <input type="text" class="form-control" formControlName="comment" id="comment" required placeholder="Sadržaj"/>
-                    </div>
-            
-                    <div class="d-grid gap-2 col-8 mx-auto">
-                        <button class="btn btn-outline-success" [disabled]="commentForm.invalid" (click)="saveComment()">Sačuvaj komentar</button>
-                    </div>
-                </form>
+				<h1>Novi komentar</h1>
+				<form [formGroup]="commentForm" class="row g-3">
+					<div class="col-12">
+						<input type="text" class="form-control" formControlName="comment" id="comment" required placeholder="Sadržaj"/>
+					</div>
+					<div class="d-grid gap-2 col-8 mx-auto">
+						<button class="btn btn-outline-success" [disabled]="commentForm.invalid" (click)="saveComment()">Sačuvaj komentar</button>
+					</div>
+				</form>
             </div>
 
             <h1 class="commentTitle">Komentari</h1>
-                <p *ngIf="comments.length === 0">Nema podataka za prikaz.</p>
-                <div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor="let comm of comments">
-                    <div class="card-header">{{ comm.userAccount.username }}</div>
-                    <div class="card-body">
-                    <p class="card-text">{{ comm.content }}</p>
-                </div>
+			<p *ngIf="comments.length === 0">Nema podataka za prikaz.</p>
+			<div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor="let comm of comments">
+				<div class="card-header">{{ comm.userAccount.username }}</div>
+				<div class="card-body">
+					<p class="card-text">{{ comm.content }}</p>
+				</div>
             </div>
         </div>
-    
     </div>
-    
 </div>

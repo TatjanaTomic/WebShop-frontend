@@ -1,46 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background: url('assets/bg.jpg') center center fixed;
-    background-size: cover;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: url("assets/bg.jpg") center center fixed;
+  background-size: cover;
 }
 
 .myForm {
-	width: 45vw;
-	padding: 45px 55px 25px 55px;
-	margin: 0px auto;
-	border: 1px solid silver;
-	border-radius: 35px;
-	background-color: rgb(224, 224, 224, 0.5);
+  width: 45vw;
+  padding: 45px 55px 25px 55px;
+  margin: 0px auto;
+  border: 1px solid silver;
+  border-radius: 35px;
+  background-color: rgb(224, 224, 224, 0.5);
 }
 
 .centeredTitle {
-	margin-bottom: 15px;
-	text-align: center;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .myContainer {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .errorMessage {
-	color: red;
-	font-family: 'Rowdies', cursive;
-    font-weight: bold;
-    padding-top: 15px;
+  color: red;
+  font-family: "Rowdies", cursive;
+  font-weight: bold;
+  padding-top: 15px;
 }

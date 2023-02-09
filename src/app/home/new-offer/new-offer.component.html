@@ -1,57 +1,52 @@
 <div class="newOfferContainer">
     <a class="text-dark btn btn-link" routerLink="/home">Početna stranica...</a>
     <h1>Nova ponuda</h1>
-
     <form [formGroup]="form" class="row g-3 myForm">
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="name" id="name" required placeholder="Naziv proizvoda">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="description" id="description" required placeholder="Opis">
-            </div>
-            <div class="col-12">
-                <input type="number" class="form-control" formControlName="price" id="price" required placeholder="Cijena">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="contact" id="contact" required placeholder="Kontakt">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="address" id="address" required placeholder="Adresa">
-            </div>
-            <div class="col-12">
-                <input type="checkbox" class="btn-check" id="isNew" autocomplete="off" (change)="isNewChecked($event)">
-                <label class="btn btn-outline-primary" for="isNew">NOVO</label>
-            </div>
-            <div class="col-12">
-                <label for="select" class="form-label">Kategorija proizvoda</label>
-                <select formControlName="select" class="form-select form-select mb-3" (change)="selectChangeHandler($event)" required>
-                    <option *ngFor="let t of selectElemenValues" value={{t.catId}}>{{t.catTitle}}</option>
-                </select>
-            </div>
-
-            <form [formGroup]="attributesForm" class="row g-3">
-                <div class="col-12" *ngFor="let a of attributes">
-                    <input type="text" class="form-control" formControlName={{a.name}} id={{a.name}} placeholder={{a.name}}>
-                </div>
-            </form>
-            
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="image1" id="image1" placeholder="Slika 1">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="image2" id="image2" placeholder="Slika 2">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="image3" id="image3" placeholder="Slika 3">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="image4" id="image4" placeholder="Slika 4">
-            </div>
-            <div class="col-12">
-                <input type="text" class="form-control" formControlName="image5" id="image5" placeholder="Slika 5">
-            </div>
-
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="name" id="name" required placeholder="Naziv proizvoda">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="description" id="description" required placeholder="Opis">
+		</div>
+		<div class="col-12">
+			<input type="number" class="form-control" formControlName="price" id="price" required placeholder="Cijena">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="contact" id="contact" required placeholder="Kontakt">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="address" id="address" required placeholder="Adresa">
+		</div>
+		<div class="col-12">
+			<input type="checkbox" class="btn-check" id="isNew" autocomplete="off" (change)="isNewChecked($event)">
+			<label class="btn btn-outline-primary" for="isNew">NOVO</label>
+		</div>
+		<div class="col-12">
+			<label for="select" class="form-label">Kategorija proizvoda</label>
+			<select formControlName="select" class="form-select form-select mb-3" (change)="selectChangeHandler($event)" required>
+				<option *ngFor="let t of selectElemenValues" value={{t.catId}}>{{t.catTitle}}</option>
+			</select>
+		</div>
+		<form [formGroup]="attributesForm" class="row g-3">
+			<div class="col-12" *ngFor="let a of attributes">
+				<input type="text" class="form-control" formControlName={{a.name}} id={{a.name}} placeholder={{a.name}}>
+			</div>
+		</form>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="image1" id="image1" placeholder="Slika 1">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="image2" id="image2" placeholder="Slika 2">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="image3" id="image3" placeholder="Slika 3">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="image4" id="image4" placeholder="Slika 4">
+		</div>
+		<div class="col-12">
+			<input type="text" class="form-control" formControlName="image5" id="image5" placeholder="Slika 5">
+		</div>
         <button class="btn btn-warning btn-lg" [disabled]="form.invalid" (click)="save()">Dodaj ponudu</button>
     </form>
-    
 </div>
